@@ -1,20 +1,26 @@
 from dotenv import load_dotenv
 load_dotenv()
 
+# create user order_up with password '9uCxydbt';
+# create database order_up_dev with owner order_up;
+
 # Regardless of the lint error you receive,
 # load_dotenv must run before running this
 # so that the environment variables are
 # properly loaded.
 from app import app, db
-from app.models import Employee, Menu, MenuItem, MenuItemType
+from app.models import Employee, Menu, MenuItem, MenuItemType, Table, Order, OrderDetail
 
 
 with app.app_context():
     db.drop_all()
     db.create_all()
 
-    employee = Employee(name="Margot", employee_number=1234, password="password")
-    db.session.add(employee)
+    employee1 = Employee(name="Margot", employee_number=1234, password="password")
+    db.session.add(employee1)
+
+    employee2 = Employee(name="Robbie", employee_number=4321, password="password")
+    db.session.add(employee2)
 
     beverages = MenuItemType(name="Beverages")
     db.session.add(beverages)
@@ -39,7 +45,16 @@ with app.app_context():
     db.session.add(salad)
     sandwich = MenuItem(name="Sandwich", price=9.99, type=entrees, menu=lunch)
     db.session.add(sandwich)
-    milk = MenuItem(name="milk", price=1.0, type=beverages, menu=lunch)
+    milk = MenuItem(name="Milk", price=1.0, type=beverages, menu=lunch)
     db.session.add(milk)
+
+    tables=[ Table(number=i,capacity=4) for i in range(1,11) ]
+    for table in tables:
+        db.session.add(table)
+
+    order1 = Order(finished=False, employee=employee1, table=tables[0])
+    db.session.add(order1)
+    detail1 = OrderDetail(order=order1, menu_item=jambalaya)
+    db.session.add(detail1)
 
     db.session.commit()
