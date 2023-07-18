@@ -1,5 +1,6 @@
 from flask_login import UserMixin
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import ForeignKey
 from werkzeug.security import generate_password_hash, check_password_hash
 
 db = SQLAlchemy()
@@ -23,3 +24,29 @@ class Employee(db.Model, UserMixin):  # Your class definition
     def check_password(self,password):
         return check_password_hash(self.password, password)
     
+class Menu(db.Model):
+    __tablename__='menus'
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(30),nullable=False)
+        
+    menu_items = db.relationship("MenuItem", back_populates="menu")
+
+class MenuItem(db.Model):
+    __tablename__='menu_items'
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(50), nullable=False)
+    price = db.Column(db.Float, nullable=False)
+
+    menu_id = db.Column(db.Integer, ForeignKey("menus.id"))
+    menu = db.relationship("Menu", back_populates="menu_items")
+
+    menu_type_id = db.Column(db.Integer, ForeignKey("menu_item_types.id"))
+    type = db.relationship("MenuItemType")
+
+
+class MenuItemType(db.Model):
+    __tablename__='menu_item_types'
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(20),nullable=False)
+
+
