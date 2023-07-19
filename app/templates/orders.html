@@ -2,6 +2,8 @@
 
 {% block content %}
 <h1>Order Up!</h1>
+
+<h2>Table Assignments</h2>
 <table>
     <tr>
         <th>Table #</th>
@@ -19,17 +21,18 @@
     </tr>
     {% endfor %}
 
-    
-    <form method="post" action="{{ url_for('.index') }}">
-        {{ form.csrf_token }}
-        <div>
-            {{ form.tables.label }} {{ form.tables }}
-        </div>
-        <div>
-            {{ form.servers.label }} {{ form.servers }}
-        </div>
-        <div>{{ form.assign }}</div>
-    </form>
-    
 </table>
+    
+<h2>Assign A Table</h2>
+<form method="post" action="{{ url_for('.index') }}">
+    {{ form.csrf_token }}
+    <div>
+        {{ form.table.label }} {{ form.table }}
+    </div>
+    <div>
+        {{ form.employee.label }} {{ form.employee }}
+    </div>
+    <div>{{ form.assign }}</div>
+</form>
+    
 {% endblock %}

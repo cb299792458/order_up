@@ -9,6 +9,6 @@ class LoginForm(FlaskForm):
     submit = SubmitField('Log In')
 
 class TableAssignmentForm(FlaskForm):
-    tables = SelectField("Tables", coerce=int)
-    servers = SelectField("Servers", coerce=int)
+    table = SelectField("Table", coerce=int)
+    employee = SelectField("Employee", coerce=int)
     assign = SubmitField("Assign")

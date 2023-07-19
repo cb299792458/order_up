@@ -19,12 +19,12 @@ def index():
     busy_tables = [order.table_id for order in open_orders]
     open_tables = [table for table in tables if table.id not in busy_tables]
 
-    form.tables.choices=[(t.id,t.id) for t in open_tables]
-    form.servers.choices=[(e.id,e.name) for e in employees]
+    form.table.choices=[(t.id,t.id) for t in open_tables]
+    form.employee.choices=[(e.id,e.name) for e in employees]
 
     if form.validate_on_submit():
-        table=form.tables.data
-        employee=form.servers.data
+        table=form.table.data
+        employee=form.employee.data
         order = Order(finished=False,employee_id=employee,table_id=table)
         db.session.add(order)
         db.session.commit()
