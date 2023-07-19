@@ -20,15 +20,16 @@
     {% endfor %}
 
     
-    <form method="post" action="">
+    <form method="post" action="{{ url_for('.index') }}">
         {{ form.csrf_token }}
-    <div>
-        {{ form.tables.label }} {{ form.tables }}
-    </div>
-    <div>
-      {{ form.servers.label }} {{ form.servers }}
-    </div>
-    <div>{{ form.assign }}</div>
+        <div>
+            {{ form.tables.label }} {{ form.tables }}
+        </div>
+        <div>
+            {{ form.servers.label }} {{ form.servers }}
+        </div>
+        <div>{{ form.assign }}</div>
     </form>
+    
 </table>
 {% endblock %}
