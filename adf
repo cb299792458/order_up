@@ -1,0 +1,6 @@
+ id |  name  | employee_number |                                            hashed_password                                             
+----+--------+-----------------+--------------------------------------------------------------------------------------------------------
+  1 | Margot |            1234 | pbkdf2:sha256:600000$byWTOpG6qiECugVN$791bedc2491b523d3ea9ea9c6247022d2403db6b81d9d8143fe52a60e26cc414
+  2 | Robbie |            4321 | pbkdf2:sha256:600000$mnnuiTY4ntv6brq1$be1af283f54038dcf9e3c8495cab79efe7275693652265762d378280e5094519
+(2 rows)
+

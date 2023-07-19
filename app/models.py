@@ -72,7 +72,7 @@ class Order(db.Model):
     table_id = db.Column(db.Integer, ForeignKey('tables.id'), nullable=False)
     table = db.relationship("Table", back_populates="orders")
 
-    details=db.relationship("OrderDetail", back_populates="order")
+    details = db.relationship("OrderDetail", back_populates="order")
 
 
 class OrderDetail(db.Model):

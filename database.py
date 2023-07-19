@@ -48,7 +48,7 @@ with app.app_context():
     milk = MenuItem(name="Milk", price=1.0, type=beverages, menu=lunch)
     db.session.add(milk)
 
-    tables=[ Table(number=i,capacity=4) for i in range(1,11) ]
+    tables=[ Table(number=i,capacity=4) for i in range(1,10) ]
     for table in tables:
         db.session.add(table)
 
@@ -56,5 +56,13 @@ with app.app_context():
     db.session.add(order1)
     detail1 = OrderDetail(order=order1, menu_item=jambalaya)
     db.session.add(detail1)
+
+    order2 = Order(finished=False, employee=employee2, table=tables[1])
+    db.session.add(order2)
+    detail2 = OrderDetail(order=order1, menu_item=fries)
+    db.session.add(detail2)
+    detail3 = OrderDetail(order=order1, menu_item=drp)
+    db.session.add(detail3)
+
 
     db.session.commit()

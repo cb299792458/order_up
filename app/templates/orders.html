@@ -2,4 +2,20 @@
 
 {% block content %}
 <h1>Order Up!</h1>
+<table>
+    <tr>
+        <th>Table #</th>
+        <th>Employee</th>
+    </tr>
+    {% for table in tables %}
+    <tr>
+        <td>{{ table.id }}</td>
+        {% if table.orders %}
+            <td>{{ table.orders[0].employee.name }}</td>
+        {% else %}
+            <td>Not Assigned</td>
+        {% endif %}
+    </tr>
+    {% endfor %}
+</table>
 {% endblock %}
