@@ -3,7 +3,7 @@
 {% block content %}
 <h1>Order Up!</h1>
 
-<h2>Table Assignments</h2>
+<!-- <h2>Table Assignments</h2>
 <table>
     <tr>
         <th>Table #</th>
@@ -21,7 +21,7 @@
     </tr>
     {% endfor %}
 
-</table>
+</table> -->
     
 <h2>Assign A Table</h2>
 <form method="post" action="{{ url_for('.index') }}">
@@ -34,5 +34,27 @@
     </div>
     <div>{{ form.assign }}</div>
 </form>
+
+<h2>Your Tables</h2>
+<table>
+    <tr>
+        <th>Table #</th>
+        <th>Order Item</th>
+        <!-- <th>Close Table</th> -->
+    </tr>
+
+    {% for table in your_tables %}
+    <tr>
+        <td>{{ table.id }}</td>
+        <td>here</td>
+        <td>
+            <form method="POST" action="{{ url_for('.close',id=table.id) }}">
+                <button type="submit">Close</button>
+            </form>
+        </td>
+    </tr>
+    {% endfor %}
+
+</table>
     
 {% endblock %}
