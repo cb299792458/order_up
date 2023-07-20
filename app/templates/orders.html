@@ -71,7 +71,18 @@
         </td>
     </tr>
     {% endfor %}
-
 </table>
+
+<h2>Order Item</h2>
+<form method="post" action="{{ url_for('.index') }}">
+    {{ order_form.csrf_token }}
+    <div>
+        {{ order_form.table.label }} {{ order_form.table }}
+    </div>
+    <div>
+        {{ order_form.item.label }} {{ order_form.item }}
+    </div>
+    <div>{{ order_form.order }}</div>
+</form>
     
 {% endblock %}
