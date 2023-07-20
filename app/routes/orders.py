@@ -3,6 +3,7 @@ from flask_login import login_required, current_user
 from app.models import Table, Employee, Order
 from app.forms import TableAssignmentForm
 from app import db
+from collections import defaultdict
 
 bp = Blueprint("orders", __name__, url_prefix="")
 
@@ -25,6 +26,11 @@ def index():
     your_id = int(current_user.get_id())
     your_tables = [table for table in tables if table.orders and table.orders[0].employee.id==your_id]
 
+    sums=defaultdict(int)
+    for table in your_tables:
+        for item in table.orders[0].details:
+            sums[table.id]+=item.menu_item.price
+
     if form.validate_on_submit():
         table=form.table.data
         employee=form.employee.data
@@ -33,7 +39,7 @@ def index():
         db.session.commit()
         return redirect(url_for('.index'))
 
-    return render_template('orders.html', tables=tables, form=form, your_tables=your_tables)
+    return render_template('orders.html', tables=tables, form=form, your_tables=your_tables, sums=sums)
 
 @bp.route("/close_table/<int:id>",methods=['POST'])
 @login_required

@@ -38,15 +38,32 @@
 <h2>Your Tables</h2>
 <table>
     <tr>
-        <th>Table #</th>
-        <th>Order Item</th>
+        <th>Table</th>
+        <th>Item</th>
+        <th>Price</th>
         <!-- <th>Close Table</th> -->
     </tr>
 
     {% for table in your_tables %}
     <tr>
         <td>{{ table.id }}</td>
-        <td>here</td>
+        {% if table.orders[0] and table.orders[0].details %}
+            <td>
+            {% for item in table.orders[0].details %}
+                <p>{{ item.menu_item.name }}</p>
+            {% endfor %}
+                Total: 
+            </td>
+            <td>
+            {% for item in table.orders[0].details %}
+                <p>$ {{ item.menu_item.price }}</p>
+            {% endfor %}
+                $ {{ sums[table.id] }}
+            </td>
+        {% else %}
+            <td></td>
+            <td></td>
+        {% endif %}
         <td>
             <form method="POST" action="{{ url_for('.close',id=table.id) }}">
                 <button type="submit">Close</button>

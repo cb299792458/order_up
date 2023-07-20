@@ -34,9 +34,9 @@ with app.app_context():
     lunch = Menu(name='Lunch')
     db.session.add(lunch)
 
-    fries = MenuItem(name="French Fries", price=3.50, type=sides, menu=dinner)
+    fries = MenuItem(name="French Fries", price=3.59, type=sides, menu=dinner)
     db.session.add(fries)
-    drp = MenuItem(name="Dr. Pepper", price=1.0, type=beverages, menu=dinner)
+    drp = MenuItem(name="Dr. Pepper", price=1.09, type=beverages, menu=dinner)
     db.session.add(drp)
     jambalaya = MenuItem(name="Jambalaya", price=21.98, type=entrees, menu=dinner)
     db.session.add(jambalaya)
@@ -45,7 +45,7 @@ with app.app_context():
     db.session.add(salad)
     sandwich = MenuItem(name="Sandwich", price=9.99, type=entrees, menu=lunch)
     db.session.add(sandwich)
-    milk = MenuItem(name="Milk", price=1.0, type=beverages, menu=lunch)
+    milk = MenuItem(name="Milk", price=1.02, type=beverages, menu=lunch)
     db.session.add(milk)
 
     tables=[ Table(number=i,capacity=4) for i in range(1,10) ]
@@ -59,9 +59,9 @@ with app.app_context():
 
     order2 = Order(finished=False, employee=employee2, table=tables[1])
     db.session.add(order2)
-    detail2 = OrderDetail(order=order1, menu_item=fries)
+    detail2 = OrderDetail(order=order2, menu_item=fries)
     db.session.add(detail2)
-    detail3 = OrderDetail(order=order1, menu_item=drp)
+    detail3 = OrderDetail(order=order2, menu_item=drp)
     db.session.add(detail3)
 
 
